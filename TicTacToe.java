@@ -12,23 +12,61 @@ public class TicTacToe
     {
         board = new char[3][3];
     }
-    public boolean checkWin()
+    public boolean checkWin(char c)
     {
-        
+        if (checkRow(c) || checkColumn(c) || checkDiagonal(c))
+            return true;
+        return false;
     }
     private boolean checkRow(char c)
     {
         int num = 0;
-        for(int i = 0; i < board.length; i++)
+        for(int row = 0; row < board.length; row++)
         {
-            for(int j = 0; j < board[i].length; j++)
+            for(int col = 0; col < board[row].length; col++)
             {
-                if (board[i][j] == c)
+                if (board[row][col] == c)
                     num++;
                 if (num == 3)
                     return true;
             }
             num = 0;
+        }
+        return false;
+    }
+    private boolean checkColumn(char c)
+    {
+        int num = 0;
+        for (int col = 0; col < board[0].length; col++)
+        {
+            for (int row = 0; row < board.length; row++)
+            {
+                if(board[row][col] == c)
+                    num++;
+                if (num == 3)
+                    return true;
+            }
+            num = 0;
+        }
+        return false;
+    }
+    private boolean checkDiagonal(char c)
+    {
+        int num = 0;
+        for (int i = 0; i < board.length; i++)
+        {
+            if (board[i][i] == c)
+                num++;
+            if (num == 3)
+                return true;
+        }
+        num = 0;
+        for (int j = board.length-1; j > -1; j--)
+        {
+            if (board[j][j] == c)
+                num++;
+            if (num == 3)
+                return true;
         }
         return false;
     }
